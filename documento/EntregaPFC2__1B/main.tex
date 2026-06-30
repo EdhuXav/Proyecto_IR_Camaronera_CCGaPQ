@@ -147,7 +147,58 @@ ING. GUERRERO ULLOA GLEISTON CICERON\\[0.5cm]
 
 
 \section{Requisitos específicos}
+\subsection{Interfaces externas}
 
+\subsubsection{Interfaz de usuario}
+La siguiente tabla presenta las principales interfaces de usuario del sistema, su descripción y los requisitos funcionales que soportan.
+
+\begin{longtable}{|p{4cm}|p{7cm}|p{4cm}|}
+\caption{Interfaces de usuario del sistema y requisitos funcionales asociados.}
+\label{tab:interfaz_usuario} \\
+\hline
+\textbf{Pantalla} & \textbf{Descripción} & \textbf{RF que soporta} \\
+\hline
+
+Login / Selección de rol & Autenticación con usuario y contraseña; redirección según rol (RBAC). & RF-17, RF-18 \\
+\hline
+
+Dashboard general & Resumen de estanques activos, alertas pendientes (agua, sanitarias, inventario) y accesos rápidos según rol. & RF-04, RF-10, RF-16, RF-20 \\
+\hline
+
+Gestión de Estanques & Listado de piscinas con estado, capacidad, formulario de alta/edición. & RF-01, RF-02, RF-03, RF-04 \\
+\hline
+
+Registro de Siembra & Formulario de nueva siembra (fecha, larvas, proveedor, responsable) y vista de historial por estanque. & RF-05, RF-06, RF-07, RF-08 \\
+\hline
+
+Monitoreo de Parámetros del Agua & Vista en tiempo real (tabla o gráfico) de pH, oxígeno, temperatura, salinidad, turbidez, alcalinidad, con indicador de alerta. & RF-09, RF-10, RF-11 \\
+\hline
+
+Plan de Alimentación & Cálculo de ración diaria sugerida y formulario de registro de consumo real por estanque. & RF-12, RF-13, RF-14 \\
+\hline
+
+Historial Sanitario & Registro de incidentes (síntomas, diagnóstico, tratamiento) y listado de alertas de mortalidad. & RF-15, RF-16 \\
+\hline
+
+Gestión de Empleados y Tareas & Alta de empleados, asignación de roles y tareas diarias, vista de cumplimiento. & RF-17, RF-18 \\
+\hline
+
+Inventario de Bodega & Entradas/salidas de insumos, niveles de stock y alertas de stock mínimo. & RF-19, RF-20 \\
+\hline
+
+Órdenes de Mantenimiento & Registro y seguimiento de mantenimiento preventivo/correctivo de equipos. & RF-21 \\
+\hline
+
+Registro de Cosecha & Formulario de cosecha (peso, talla, rendimiento) y cálculo de costo de producción. & RF-22, RF-23 \\
+\hline
+
+Reportes y Comparativos & Generación de reportes de producción, costos y comparación entre ciclos. & RF-24 \\
+\hline
+
+Panel de IA & Predicción de cosecha óptima, anomalías detectadas y recomendaciones de alimentación. & RF-25 \\
+\hline
+
+\end{longtable}
 
 \subsection{Interfaces externas}
 
