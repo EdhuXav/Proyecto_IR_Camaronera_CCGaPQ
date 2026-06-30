@@ -576,13 +576,62 @@ A continuación, se presentan los requisitos funcionales del sistema, organizado
 
 \end{longtable}
 
-
 \subsection{Requisitos no funcionales}
 
+Cada NFR se asocia a una característica de calidad de ISO/IEC 25010 y se cuantifica con métrica y criterio de verificación, evitando términos vagos.
 
+\begin{longtable}{|p{3.5cm}|p{12cm}|}
+\caption{Requisitos no funcionales del sistema.}
+\label{tab:rnf} \\
+\hline
+
+\multicolumn{2}{|c|}{\textbf{Requisitos No Funcionales (ISO/IEC 25010)}} \\ \hline
+
+\textbf{RNF-01 — Eficiencia de desempeño (Performance Efficiency)} &
+\textbf{Descripción:} El sistema debe registrar un nuevo dato de parámetro de agua (manual o vía IoT) en un tiempo de respuesta no mayor a 2 segundos bajo carga normal (hasta 50 usuarios concurrentes). \newline
+\textbf{Criterio de verificación:} Prueba de carga con 50 usuarios concurrentes; tiempo de respuesta medido en el percentil 95 $ \leq $ 2 s. \\ \hline
+
+\textbf{RNF-02 — Disponibilidad (Reliability / Availability)} &
+\textbf{Descripción:} El sistema debe estar disponible al menos el 98\% del tiempo mensual, excluyendo ventanas de mantenimiento programado. \newline
+\textbf{Criterio de verificación:} Monitoreo de uptime durante un mes; tiempo de inactividad no programado $ \leq $ 14.4 horas/mes. \\ \hline
+
+\textbf{RNF-03 — Usabilidad (Usability / Operability)} &
+\textbf{Descripción:} Un operario de producción (nivel técnico bajo-medio) debe poder completar el registro de alimentación diaria en un máximo de 3 pasos y 60 segundos, sin capacitación previa más allá de la inducción básica. \newline
+\textbf{Criterio de verificación:} Prueba de usabilidad con al menos 3 operarios reales; tiempo promedio de tarea $ \leq $ 60 s y tasa de error $ \leq $ 10\%. \\ \hline
+
+\textbf{RNF-04 — Seguridad (Security)} &
+\textbf{Descripción:} El sistema debe implementar control de acceso basado en roles (RBAC) y cifrado de contraseñas mediante bcrypt o equivalente, bloqueando el acceso a módulos no autorizados para cada rol. \newline
+\textbf{Criterio de verificación:} Pruebas de control de acceso: 0 accesos exitosos a funciones no autorizadas en 100\% de los casos de prueba por rol; contraseñas nunca almacenadas en texto plano. \\ \hline
+
+\textbf{RNF-05 — Tolerancia a fallos (Fault Tolerance)} &
+\textbf{Descripción:} Los módulos críticos deben permitir captura de datos sin conexión a internet, sincronizando al menos el 95\% de los registros pendientes dentro de los 5 minutos posteriores a recuperar la conectividad. \newline
+\textbf{Criterio de verificación:} Prueba de desconexión de 30 minutos con 20 registros offline; sincronización $ \geq $ 95\% dentro de 5 minutos tras reconexión. \\ \hline
+
+\textbf{RNF-06 — Compatibilidad (Compatibility / Portability)} &
+\textbf{Descripción:} El sistema debe funcionar sin errores en Chrome v100+ y Firefox v100+, en escritorio (1366x768 o superior) y tablet Android (10 pulgadas o superior). \newline
+\textbf{Criterio de verificación:} Pruebas funcionales completas en ambos navegadores y en al menos 2 dispositivos; 0 errores bloqueantes. \\ \hline
+
+\textbf{RNF-07 — Mantenibilidad (Maintainability)} &
+\textbf{Descripción:} El backend debe mantener una cobertura de pruebas unitarias automatizadas de al menos 60\% en módulos críticos (alimentación, parámetros de agua, siembras). \newline
+\textbf{Criterio de verificación:} Reporte de cobertura generado por herramientas de testing; cobertura $ \geq $ 60\% en módulos críticos. \\ \hline
+
+\end{longtable}
 
 \subsection{Restricciones de diseño}
 
+\begin{itemize}
+\item \textbf{Arquitectura cliente-servidor:} El sistema debe diseñarse bajo arquitectura cliente-servidor con API REST, permitiendo el consumo desde web y futuras aplicaciones móviles nativas sin rediseño del backend.
+
+\item \textbf{Base de datos relacional:} La base de datos debe ser relacional (PostgreSQL o MySQL), conforme a la restricción tecnológica definida en las secciones 2.5 y 2.6. No se permite el uso de motores NoSQL como almacenamiento principal de datos transaccionales.
+
+\item \textbf{Diseño de interfaz (UX):} La interfaz debe priorizar formularios cortos y de bajo esfuerzo cognitivo para roles de nivel técnico bajo-medio (Operario, Bodeguero), conforme al RNF-03 de usabilidad.
+
+\item \textbf{Sincronización offline:} El módulo de sincronización offline (RNF-05) debe implementarse mediante una cola local de operaciones pendientes, evitando copias completas de la base de datos en el dispositivo cliente, debido a limitaciones de hardware definidas en la sección 2.5.
+
+\item \textbf{Módulo de inteligencia artificial:} El módulo de IA (RF-25) debe implementarse como un servicio desacoplado del backend principal (microservicio o componente independiente), de forma que su entrenamiento o falla no afecte la disponibilidad del sistema (RNF-02).
+
+\item \textbf{Uso de software libre:} Todo el desarrollo debe priorizar frameworks y bibliotecas de código abierto, conforme a la restricción presupuestaria definida en la sección 2.6.
+\end{itemize}
 
 % =====================================================================
 \section{Modelado del sistema (UML)}
