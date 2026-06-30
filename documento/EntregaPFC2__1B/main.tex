@@ -490,6 +490,93 @@ A continuación, se presentan los requisitos funcionales del sistema, organizado
 
 \end{longtable}
 
+\begin{longtable}{|p{3.5cm}|p{12cm}|}
+\caption{Requisitos funcionales del módulo Mantenimiento.}
+\label{tab:rf-mantenimiento} \\
+\hline
+
+\multicolumn{2}{|c|}{\textbf{Mantenimiento}} \\ \hline
+
+\textbf{RF-21 — Registro de órdenes de mantenimiento} &
+\textbf{Descripción:} El sistema debe registrar las órdenes de mantenimiento (preventivo y correctivo) de equipos: bombas, aireadores, generadores y vehículos. \newline
+\textbf{Actor/Origen:} Supervisor Técnico de Mantenimiento / Encuesta (RC-21). \newline
+\textbf{Entradas:} Equipo, tipo de mantenimiento, fecha, descripción, responsable. \newline
+\textbf{Salidas:} orden de mantenimiento con estado (pendiente/en proceso/concluida). \newline
+\textbf{Precondición:} Equipo registrado en el catálogo de activos. \newline
+\textbf{Postcondición:} El historial de mantenimiento del equipo queda actualizado. \newline
+\textbf{Prioridad:} Could have. \newline
+\textbf{Criterio de verificación:} Cada orden concluida registra fecha de cierre y responsable que la ejecutó. \\ \hline
+
+\end{longtable}
+
+\begin{longtable}{|p{3.5cm}|p{12cm}|}
+\caption{Requisitos funcionales del módulo Gestión de Cosechas.}
+\label{tab:rf-cosechas} \\
+\hline
+
+\multicolumn{2}{|c|}{\textbf{Gestión de Cosechas}} \\ \hline
+
+\textbf{RF-22 — Registro de cosecha} &
+\textbf{Descripción:} El sistema debe registrar cada cosecha con fecha, estanque, peso total, talla promedio y rendimiento (libras/hectárea). \newline
+\textbf{Actor/Origen:} Administrador / Encuesta (RC-22). \newline
+\textbf{Entradas:} Fecha, estanque, peso total, talla promedio. \newline
+\textbf{Salidas:} rendimiento calculado, ficha de cosecha. \newline
+\textbf{Precondición:} Estanque en estado "cosecha". \newline
+\textbf{Postcondición:} El estanque puede pasar a estado "inactivo" o "preparación" para el siguiente ciclo. \newline
+\textbf{Prioridad:} Must have. \newline
+\textbf{Criterio de verificación:} El rendimiento (libras/hectárea) se calcula automáticamente a partir del peso total y la superficie del estanque. \\ \hline
+
+\textbf{RF-23 — Cálculo de costo de producción} &
+\textbf{Descripción:} El sistema debe calcular el costo de producción por cosecha, incluyendo alimento, insumos y mano de obra. \newline
+\textbf{Actor/Origen:} Administrador / Encuesta (RC-23). \newline
+\textbf{Entradas:} Consumo de alimento del ciclo, insumos utilizados, costo de mano de obra. \newline
+\textbf{Salidas:} costo total y costo por libra producida. \newline
+\textbf{Precondición:} Cosecha registrada (RF-22) y datos de alimentación/inventario disponibles para el ciclo. \newline
+\textbf{Postcondición:} Ninguna (reporte). \newline
+\textbf{Prioridad:} Should have. \newline
+\textbf{Criterio de verificación:} El costo total calculado coincide con la suma de los tres componentes (alimento + insumos + mano de obra), verificable contra un cálculo manual de control. \\ \hline
+
+\end{longtable}
+
+\begin{longtable}{|p{3.5cm}|p{12cm}|}
+\caption{Requisitos funcionales del módulo Reportes.}
+\label{tab:rf-reportes} \\
+\hline
+
+\multicolumn{2}{|c|}{\textbf{Reportes}} \\ \hline
+
+\textbf{RF-24 — Reportes comparativos de producción} &
+\textbf{Descripción:} El sistema debe generar reportes comparativos de producción entre ciclos productivos. \newline
+\textbf{Actor/Origen:} Administrador / Entrevista y Encuesta (RC-24). \newline
+\textbf{Entradas:} Selección de ciclos/estanques a comparar. \newline
+\textbf{Salidas:} reporte (tabla/gráfico) con métricas comparadas (rendimiento, FCR, costo). \newline
+\textbf{Precondición:} Al menos dos ciclos productivos con datos completos. \newline
+\textbf{Postcondición:} Ninguna (reporte exportable). \newline
+\textbf{Prioridad:} Should have. \newline
+\textbf{Criterio de verificación:} El reporte permite exportarse en formato PDF o Excel sin pérdida de datos. \\ \hline
+
+\end{longtable}
+
+\begin{longtable}{|p{3.5cm}|p{12cm}|}
+\caption{Requisitos funcionales del módulo Inteligencia Artificial.}
+\label{tab:rf-ia} \\
+\hline
+
+\multicolumn{2}{|c|}{\textbf{Inteligencia Artificial}} \\ \hline
+
+\textbf{RF-25 — Predicción de momento óptimo de cosecha} &
+\textbf{Descripción:} El sistema debe incorporar un módulo de IA que prediga el momento óptimo de cosecha con base en el historial de grameos y parámetros del agua. \newline
+\textbf{Actor/Origen:} Técnico Acuícola / Administrador / Entrevista (RC-25). \newline
+\textbf{Entradas:} Historial de grameos, parámetros de agua, datos de ciclos anteriores. \newline
+\textbf{Salidas:} fecha estimada óptima de cosecha, nivel de confianza. \newline
+\textbf{Precondición:} Disponibilidad de datos históricos de al menos dos ciclos productivos completos (Sección 2.7). \newline
+\textbf{Postcondición:} La predicción queda visible en el Panel de IA y puede actualizarse con nuevos datos. \newline
+\textbf{Prioridad:} Could have. \newline
+\textbf{Criterio de verificación:} La predicción se regenera automáticamente cada vez que se registra un nuevo grameo, y muestra explícitamente su nivel de confianza o margen de error. \\ \hline
+
+\end{longtable}
+
+
 \subsection{Requisitos no funcionales}
 
 
