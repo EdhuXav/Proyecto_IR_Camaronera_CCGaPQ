@@ -200,17 +200,21 @@ Panel de IA & Predicción de cosecha óptima, anomalías detectadas y recomendac
 
 \end{longtable}
 
-\subsection{Interfaces externas}
-
-\subsubsection{Interfaz de usuario}
-
 
 \subsubsection{Interfaz de hardware}
+\textbf{Sensores IoT:} dispositivos de medición de pH, oxígeno disuelto, temperatura, salinidad, turbidez y alcalinidad, instalados en cada estanque. Comunicación inalámbrica (WiFi o LoRa, según disponibilidad de cobertura en campo) hacia un gateway local que sincroniza con el servidor central.
 
+\textbf{Dispositivos cliente:} tabletas Android (mínimo Android 10) para captura en campo y computadoras de escritorio de gama media para roles administrativos. No se requiere hardware especializado adicional en el lado del cliente.
 
 
 \subsubsection{Interfaz de software}
+\textbf{Formato de intercambio con sensores IoT:} JSON sobre MQTT o HTTP REST, con timestamp, ID de estanque, tipo de parámetro y valor.
 
+\textbf{Base de datos:} PostgreSQL o MySQL (relacional), acceso mediante ORM o consultas SQL parametrizadas.
+
+\textbf{API interna:} API REST para comunicación entre el frontend (web/tablet) y el backend, y entre el backend y el módulo de IA.
+
+\textbf{Módulo de IA:} se comunica con el sistema principal mediante una API interna que recibe variables históricas (grameos, parámetros de agua, alimentación) y devuelve predicciones (momento óptimo de cosecha, anomalías, recomendaciones).
 
 
 \subsection{Requisitos funcionales}
